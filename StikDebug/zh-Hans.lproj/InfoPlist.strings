@@ -1,0 +1,3 @@
+"NSLocalNetworkUsageDescription" = "StikDebug 需要访问本地网络中的设备，以便连接到你添加到设备库的目标。";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "StikDebug 使用定位来在后台保持运行并维持 JIT 连接。";
+"NSLocationWhenInUseUsageDescription" = "StikDebug 使用定位来在后台保持运行并维持 JIT 连接。";
