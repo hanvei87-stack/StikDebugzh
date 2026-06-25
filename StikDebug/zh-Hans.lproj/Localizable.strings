@@ -344,3 +344,33 @@
 "The app to enable JIT for" = "要启用 JIT 的应用";
 "The process to terminate" = "要终止的进程";
 "A specific PID to kill instead of selecting a process" = "不选择进程时要终止的具体 PID";
+
+/* Tunnel connection */
+"Connection Error" = "连接错误";
+"Invalid Pairing File" = "配对文件无效";
+"The pairing file may be invalid or expired. You can import a new pairing file to replace it." = "配对文件可能无效或已过期。你可以导入新的配对文件来替换它。";
+"Select New File" = "选择新文件";
+"A port needed for the tunnel is already in use." = "隧道所需端口已被占用。";
+"Close other JIT, debugging, proxy, or VPN apps that may be using the tunnel." = "关闭其他可能正在使用隧道的 JIT、调试、代理或 VPN 应用。";
+"Disconnect and reconnect LocalDevVPN." = "断开并重新连接 LocalDevVPN。";
+"Restart StikDebug, then try again." = "重启 StikDebug，然后重试。";
+"If it keeps happening, reboot the device to clear the stuck port." = "如果仍然出现，请重启设备以清除被占用的端口。";
+"The device or VPN closed the tunnel connection before setup finished." = "设备或 VPN 在设置完成前关闭了隧道连接。";
+"Open LocalDevVPN and confirm the VPN is connected." = "打开 LocalDevVPN，并确认 VPN 已连接。";
+"Make sure LocalDevVPN is using the default %@ address." = "确保 LocalDevVPN 使用默认 %@ 地址。";
+"Reconnect Wi-Fi and LocalDevVPN, then try again." = "重新连接 Wi-Fi 和 LocalDevVPN，然后重试。";
+"If this keeps happening, select a fresh pairing file." = "如果持续出现，请选择一个新的配对文件。";
+"The configured target IP address is not valid." = "配置的目标 IP 地址无效。";
+"Open Settings and check the target IP address." = "打开设置并检查目标 IP 地址。";
+"Use the default %@." = "使用默认值 %@。";
+"The app could not reach the device before the connection timed out." = "连接超时前，应用无法访问设备。";
+"Confirm Wi-Fi and LocalDevVPN are both connected." = "确认 Wi-Fi 和 LocalDevVPN 都已连接。";
+"Wake and unlock the target device." = "唤醒并解锁目标设备。";
+"Confirm LocalDevVPN is exposing the device at %@." = "确认 LocalDevVPN 已在 %@ 暴露设备连接。";
+"The VPN route to the device is not available." = "通往设备的 VPN 路由不可用。";
+"Confirm iOS shows the VPN indicator." = "确认 iOS 顶部显示 VPN 指示。";
+"Try switching Wi-Fi off and on." = "尝试关闭再打开 Wi-Fi。";
+"The tunnel could not be created." = "无法创建隧道。";
+"Confirm Wi-Fi and LocalDevVPN are connected." = "确认 Wi-Fi 和 LocalDevVPN 已连接。";
+"Reconnect LocalDevVPN, then try again." = "重新连接 LocalDevVPN，然后重试。";
+"%@\n\nTarget: %@:49152\nExpected LocalDevVPN IP: %@\n\nTry this:\n%@\n\nTechnical details:\nCode %d: %@" = "%@\n\n目标：%@:49152\n预期 LocalDevVPN IP：%@\n\n请尝试：\n%@\n\n技术详情：\n代码 %d：%@";
