@@ -51,6 +51,34 @@ jobs:
       - name: 4. Package .app into .ipa
         run: |
           cp -R build/StikDebug.xcarchive/Products/Applications/StikDebug.app .
+          ICON_SOURCE="$RUNNER_TEMP/Assets.xcassets/StikDebug.imageset/StikDebug New-iOS-Default-1024x1024@1x.png"
+          INFO_PLIST="StikDebug.app/Info.plist"
+
+          cp "$ICON_SOURCE" StikDebug.app/StikDebug.png
+          sips -z 120 120 "$ICON_SOURCE" --out StikDebug.app/AppIcon60x60@2x.png
+          sips -z 180 180 "$ICON_SOURCE" --out StikDebug.app/AppIcon60x60@3x.png
+          sips -z 152 152 "$ICON_SOURCE" --out StikDebug.app/AppIcon76x76@2x.png
+          sips -z 167 167 "$ICON_SOURCE" --out StikDebug.app/AppIcon83.5x83.5@2x.png
+
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIconName" "$INFO_PLIST" || true
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIcons" "$INFO_PLIST" || true
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIcons~ipad" "$INFO_PLIST" || true
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIconFiles" "$INFO_PLIST" || true
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIconFiles array" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIconFiles:0 string AppIcon60x60" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons dict" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon dict" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles array" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles:0 string AppIcon60x60" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:UIPrerenderedIcon bool false" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad dict" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon dict" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles array" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles:0 string AppIcon60x60" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles:1 string AppIcon76x76" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles:2 string AppIcon83.5x83.5" "$INFO_PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:UIPrerenderedIcon bool false" "$INFO_PLIST"
+
           mkdir -p StikDebug.app/DDI
           curl -L --fail --retry 3 --output StikDebug.app/DDI/BuildManifest.plist "https://github.com/doronz88/DeveloperDiskImage/raw/refs/heads/main/PersonalizedImages/Xcode_iOS_DDI_Personalized/BuildManifest.plist"
           curl -L --fail --retry 3 --output StikDebug.app/DDI/Image.dmg "https://github.com/doronz88/DeveloperDiskImage/raw/refs/heads/main/PersonalizedImages/Xcode_iOS_DDI_Personalized/Image.dmg"
