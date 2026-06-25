@@ -28,9 +28,10 @@ jobs:
 
       - name: 3. Compile Project Archive
         run: |
-          # GitHub's Xcode 26 runner currently fails while thinning .icon app icon resources.
-          # Keep the repository assets intact, but skip that CI-only input for unsigned IPA packaging.
+          # GitHub's Xcode 26 runner currently fails while thinning app resources.
+          # Keep repository assets intact, but skip CI-only asset catalog compilation for unsigned IPA packaging.
           rm -rf StikDebug/StikDebug.icon
+          mv StikDebug/Assets.xcassets "$RUNNER_TEMP/Assets.xcassets"
 
           xcodebuild clean archive \
             -project StikDebug.xcodeproj \
