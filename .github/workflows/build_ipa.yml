@@ -26,24 +26,30 @@ jobs:
         with:
           xcode-version: '26.0.1'
 
-      - name: 3. Build Project
+      - name: 3. Compile Project Archive
         run: |
-          xcodebuild clean build \
+          # GitHub's Xcode 26 runner currently fails while thinning .icon app icon resources.
+          # Keep the repository assets intact, but skip that CI-only input for unsigned IPA packaging.
+          rm -rf StikDebug/StikDebug.icon
+
+          xcodebuild clean archive \
             -project StikDebug.xcodeproj \
             -scheme "StikDebug" \
             -configuration Debug \
-            -derivedDataPath build/DerivedData \
+            -archivePath build/StikDebug.xcarchive \
             -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
             ONLY_ACTIVE_ARCH=NO \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
+            ASSETCATALOG_COMPILER_APPICON_NAME="" \
             SWIFT_OPTIMIZATION_LEVEL="-Onone" \
             IPHONEOS_DEPLOYMENT_TARGET=17.4
 
       - name: 4. Package .app into .ipa
         run: |
-          cp -R build/DerivedData/Build/Products/Debug-iphoneos/StikDebug.app .
+          cp -R build/StikDebug.xcarchive/Products/Applications/StikDebug.app .
           mkdir -p Payload
           cp -R StikDebug.app Payload/
           zip -r StikDebug.ipa Payload
