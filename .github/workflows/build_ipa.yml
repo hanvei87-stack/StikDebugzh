@@ -51,6 +51,10 @@ jobs:
       - name: 4. Package .app into .ipa
         run: |
           cp -R build/StikDebug.xcarchive/Products/Applications/StikDebug.app .
+          mkdir -p StikDebug.app/DDI
+          curl -L --fail --retry 3 --output StikDebug.app/DDI/BuildManifest.plist "https://github.com/doronz88/DeveloperDiskImage/raw/refs/heads/main/PersonalizedImages/Xcode_iOS_DDI_Personalized/BuildManifest.plist"
+          curl -L --fail --retry 3 --output StikDebug.app/DDI/Image.dmg "https://github.com/doronz88/DeveloperDiskImage/raw/refs/heads/main/PersonalizedImages/Xcode_iOS_DDI_Personalized/Image.dmg"
+          curl -L --fail --retry 3 --output StikDebug.app/DDI/Image.dmg.trustcache "https://github.com/doronz88/DeveloperDiskImage/raw/refs/heads/main/PersonalizedImages/Xcode_iOS_DDI_Personalized/Image.dmg.trustcache"
           mkdir -p Payload
           cp -R StikDebug.app Payload/
           zip -r StikDebug.ipa Payload
